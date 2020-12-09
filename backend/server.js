@@ -12,6 +12,9 @@ const PORT = 4000;
 app.use(cors());
 app.use(bodyParser.json());
 
+require('./models/Company');
+app.use(require('./routes'));
+
 mongoose.connect('mongodb+srv://admin:Chinmay123!@cluster0.9zhva.mongodb.net/rank_db?retryWrites=true&w=majority', { useNewUrlParser: true });
 const connection = mongoose.connection;
 
@@ -22,3 +25,7 @@ connection.once('open', function() {
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });
+
+
+
+
