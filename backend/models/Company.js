@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Company = new Schema({
+    _id:{
+        type: Number
+    },
     company_name: {
         type: String
     },
     company_logo: {
-        type: Image
+        type: String
     },
     company_traits: {
         type: String
