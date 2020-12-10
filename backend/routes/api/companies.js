@@ -4,6 +4,20 @@ var company_router = require('express').Router();
 var Company = mongoose.model('Company');
 
 
+//GET Number of Companies
+company_router.route('/count').get(function(req, res) {
+    Company.count( {}, function(err, result){
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.json(result)
+        }
+   })
+});
+
+
+//POST Add Company
 company_router.route('/add').post(function(req, res) {
     let company = new Company(req.body);
     company.save()
@@ -16,7 +30,7 @@ company_router.route('/add').post(function(req, res) {
 });
 
 
-
+//GET Company by ID
 company_router.route('/:id').get(function(req, res) {
     let id = req.params.id;
     Company.findById(id, function(err, company) {
@@ -25,6 +39,7 @@ company_router.route('/:id').get(function(req, res) {
 });
 
 
+//POST Update Company by ID
 company_router.route('/update/:id').post(function(req, res) {
     Company.findById(req.params.id, function(err, company) {
         if (!company)
