@@ -11,8 +11,8 @@ class Ranking extends Component {
                 _id: 0,
                 company_name: "",
                 company_logo: "",
+                company_information: "",
                 company_traits: "",
-                desirable_traits: "",
                 company_eloscore: 0,
                 company_ranking: 0,
                 past_rankings: []
@@ -21,8 +21,8 @@ class Ranking extends Component {
                 _id: 0,
                 company_name: "",
                 company_logo: "",
+                company_information: "",
                 company_traits: "",
-                desirable_traits: "",
                 company_eloscore: 0,
                 company_ranking: 0,
                 past_rankings: []
@@ -59,8 +59,8 @@ class Ranking extends Component {
                         _id: currCompany._id,
                         company_name: currCompany.company_name,
                         company_logo: currCompany.company_logo,
+                        company_information: currCompany.company_information,
                         company_traits: currCompany.company_traits,
-                        desirable_traits: currCompany.desirable_traits,
                         company_eloscore: currCompany.company_eloscore,
                         company_ranking: currCompany.company_ranking,
                         past_rankings: currCompany.past_rankings
@@ -78,8 +78,8 @@ class Ranking extends Component {
                         _id: currCompany._id,
                         company_name: currCompany.company_name,
                         company_logo: currCompany.company_logo,
+                        company_information: currCompany.company_information,
                         company_traits: currCompany.company_traits,
-                        desirable_traits: currCompany.desirable_traits,
                         company_eloscore: currCompany.company_eloscore,
                         company_ranking: currCompany.company_ranking,
                         past_rankings: currCompany.past_rankings
@@ -151,7 +151,7 @@ class Ranking extends Component {
 
     handleClick(d){
         //update elo scores
-        this.eloScore(this.state.company1.company_eloscore, this.state.company2.company_eloscore, 1, d);
+        // this.eloScore(this.state.company1.company_eloscore, this.state.company2.company_eloscore, 1, d);
 
         //get new companies
         this.addCompanies(this.state.count);

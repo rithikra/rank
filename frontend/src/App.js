@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 
 import NavBar from './components/Navbar';
-import CompanyCard from './components/CompanyCard';
 
 import Ranking from './components/Ranking'
 
