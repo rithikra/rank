@@ -11,10 +11,10 @@ let Company = new Schema({
     company_logo: {
         type: String
     },
-    company_traits: {
+    company_information: {
         type: String
     },
-    desirable_traits: {
+    company_traits: {
         type: String
     },
     company_eloscore: {

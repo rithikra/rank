@@ -9,8 +9,9 @@ import {
   Link
 } from "react-router-dom";
 
-import NavBar from './components/Navbar'
+import NavBar from './components/Navbar';
 
+import Ranking from './components/Ranking'
 
 class App extends Component {
   constructor(props){
@@ -28,7 +29,7 @@ class App extends Component {
             <h2>About</h2>
           </Route>
           <Route path="/ranking">
-            <h2>Ranking Page</h2>
+            <Ranking></Ranking>
           </Route>
           <Route path='/internshipMatching'>
             <h2>Internship Matching</h2>
@@ -44,5 +45,7 @@ class App extends Component {
   }
   return
 }
+
+
 
 export default App;
