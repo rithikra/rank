@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 var company_router = require('express').Router();
+const cors = require('cors');
 
 var Company = mongoose.model('Company');
 
-
 //GET Number of Companies
 company_router.route('/count').get(function(req, res) {
-    Company.count( {}, function(err, result){
+    Company.countDocuments( {}, function(err, result){
         if(err){
             res.send(err)
         }
@@ -30,7 +30,7 @@ company_router.route('/add').post(function(req, res) {
 });
 
 
-//GET Company by ID
+
 company_router.route('/:id').get(function(req, res) {
     let id = req.params.id;
     Company.findById(id, function(err, company) {
@@ -39,12 +39,12 @@ company_router.route('/:id').get(function(req, res) {
 });
 
 
-//POST Update Company by ID
 company_router.route('/update/:id').post(function(req, res) {
     Company.findById(req.params.id, function(err, company) {
-        if (!company)
+        if (!company){
             res.status(404).send("data is not found");
-        else
+        }
+        else{
             company.company_name = req.body.company_name;
             company.company_logo = req.body.company_logo;
             company.company_traits = req.body.company_traits;
@@ -59,6 +59,7 @@ company_router.route('/update/:id').post(function(req, res) {
             .catch(err => {
                 res.status(400).send("Update not possible");
             });
+        }
     });
 });
 

@@ -12,37 +12,23 @@ const PORT = 4000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const allowedOrigins = [
-    'capacitor://localhost',
-    'ionic://localhost',
-    'https://localhost',
-    'https://localhost:4000',
-    'https://localhost:3000'
-  ];
 
-const corsOptions = {
-    origin: (origin, callback) => {
-      if (allowedOrigins.includes(origin) || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error('Origin not allowed by CORS'));
-      }
-    }
-}
-  
-  // Enable preflight requests for all routes
-app.options('*', cors(corsOptions));
-  
 
 require('./models/Company');
 
-app.get('/', cors(corsOptions), (req, res, next) => {
-    res.json({ message: 'This route is CORS-enabled for an allowed origin.' });
-  })
 
 app.use(require('./routes'));
 
-mongoose.connect('mongodb+srv://admin:Chinmay123!@cluster0.9zhva.mongodb.net/rank_db?retryWrites=true&w=majority', { useNewUrlParser: true });
+app.use(function (req, res, next) {
+  // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4000');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  next();
+});
+
+mongoose.connect('mongodb+srv://admin:Chinmay123!@cluster0.9zhva.mongodb.net/rank_db?retryWrites=true&w=majority', { useNewUrlParser: true , useUnifiedTopology: true});
 const connection = mongoose.connection;
 
 connection.once('open', function() {

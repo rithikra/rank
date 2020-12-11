@@ -45,7 +45,46 @@ class Ranking extends Component {
             .catch(function (error){
                 console.log(error);
         })
-        // this.addCompanies(this.state.count);
+
+        //initialize company1 and 2
+        axios.get('http://localhost:4000/company/1')
+            .then(response => {
+                let currCompany = response.data;
+                this.setState({
+                    company1: {
+                        _id: currCompany._id,
+                        company_name: currCompany.company_name,
+                        company_logo: currCompany.company_logo,
+                        company_information: currCompany.company_information,
+                        company_traits: currCompany.company_traits,
+                        company_eloscore: currCompany.company_eloscore,
+                        company_ranking: currCompany.company_ranking,
+                        past_rankings: currCompany.past_rankings
+                    }
+                });
+            })
+            .catch(function (error){
+                console.log(error);
+        })
+        axios.get('http://localhost:4000/company/2')
+            .then(response => {
+                let currCompany = response.data;
+                this.setState({
+                    company2: {
+                        _id: currCompany._id,
+                        company_name: currCompany.company_name,
+                        company_logo: currCompany.company_logo,
+                        company_information: currCompany.company_information,
+                        company_traits: currCompany.company_traits,
+                        company_eloscore: currCompany.company_eloscore,
+                        company_ranking: currCompany.company_ranking,
+                        past_rankings: currCompany.past_rankings
+                    }
+                });
+            })
+            .catch(function (error){
+                console.log(error);
+        })
     }
 
     addCompanies(count) {
@@ -129,33 +168,37 @@ class Ranking extends Component {
             bScore = bScore + K * (1 - probabilityB)
         }
 
+        let axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+            }
+        };
+
         //update eloscores in db
         let companyA = this.state.company1
         companyA.company_eloscore = aScore;
         console.log(companyA)
-        axios.post('https://localhost:4000/company/update/' + companyA._id, { companyA })
+        axios.post('http://localhost:4000/company/update/' + companyA._id,  companyA)
         .then(res => {
-            console.log(res);
             console.log(res.data);
         })
+        
 
         let companyB = this.state.company2
         companyB.company_eloscore = bScore;
         console.log(companyB)
-        axios.post('https://localhost:4000/company/update/' + companyB._id, { companyB })
-        .then(res => {
-            console.log(res);
+        axios.post('http://localhost:4000/company/update/' + companyB._id, companyB) 
+        .then((res) => {
             console.log(res.data);
-        })
+        });
     }
-
     handleClick(d){
         //update elo scores
-        // this.eloScore(this.state.company1.company_eloscore, this.state.company2.company_eloscore, 1, d);
+        this.eloScore(this.state.company1.company_eloscore, this.state.company2.company_eloscore, 1, d);
 
         //get new companies
         this.addCompanies(this.state.count);
-
     }
 
     render() {
