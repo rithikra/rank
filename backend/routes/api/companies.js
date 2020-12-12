@@ -4,6 +4,19 @@ const cors = require('cors');
 
 var Company = mongoose.model('Company');
 
+
+//GET Companies sorted by rank
+company_router.route('/sorted').get(function(req, res) {
+    Company.find({}).sort({company_eloscore: -1}).exec((err, sorted) =>{
+        if(err){
+            res.send(err);
+        }
+        else{
+            res.send(sorted);
+        }
+    });
+});
+
 //GET Number of Companies
 company_router.route('/count').get(function(req, res) {
     Company.countDocuments( {}, function(err, result){
@@ -13,7 +26,7 @@ company_router.route('/count').get(function(req, res) {
         else{
             res.json(result)
         }
-   })
+   });
 });
 
 

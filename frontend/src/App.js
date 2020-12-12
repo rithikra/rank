@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import NavBar from './components/Navbar';
-
+import Home from './components/Home';
 import Ranking from './components/Ranking'
 
 class App extends Component {
@@ -35,7 +35,7 @@ class App extends Component {
             <h2>Internship Matching</h2>
           </Route>
           <Route path="/">
-            <h2>Home</h2>
+            <Home></Home>
           </Route>
         </Switch>
       </div>
